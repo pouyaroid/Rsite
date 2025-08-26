@@ -8,7 +8,7 @@
 
 
 <!--================Hero Banner Area Start =================-->
-<section class="hero-banner magic-ball">
+{{-- <section class="hero-banner magic-ball">
 	<div class="container">
 		<div class="row align-items-center text-center text-md-right">
 			<div class="col-md-6 col-lg-5 mb-5 mb-md-0">
@@ -27,55 +27,66 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --}}
 <!--================Hero Banner Area End =================-->
 
 
 <!--================Service Area Start =================-->
-<section class="section-margin generic-margin">
-	<div class="container">
-		<div class="section-intro text-center pb-90px">
-			<img class="section-intro-img" src="pics/home/section-icon.png" alt="">
-			<h2>محبوب ترین سرویس های ما</h2>
-			<p>محبوب ترین سرویس های ما که ما را از دیگران متمایز کرده است</p>
-		</div>
+<section class="section-margin generic-margin py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <img src="{{ asset('pics/home/section-icon.png') }}" alt="">
+            <h2 class="mt-3">محبوب ترین سرویس های ما</h2>
+            <p class="text-muted">محبوب ترین سرویس های ما که ما را از دیگران متمایز کرده است</p>
+        </div>
 
-		<div class="row">
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="service-card text-center">
-					<div class="service-card-img">
-						<img class="img-fluid" src="pics/home/service1.png" alt="">
-					</div>
-					<div class="service-card-body">
-						<h3>رزرو هتل</h3>
-						<p>احتمالاً خیلی از ما همین چند سال پیش را به خاطر داریم که هنوز امکان رزرو آنلاین هتل فراهم نبود؛ در آن زمان مجبور بودیم بعد از رسیدن به مقصد هتل‌مان را رزرو کنیم.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="service-card text-center">
-					<div class="service-card-img">
-						<img class="img-fluid" src="pics/home/service2.png" alt="">
-					</div>
-					<div class="service-card-body">
-						<h3>رزرو پرواز</h3>
-						<p>بزرگترین و معتبرترین سایت خرید اینترنتی بلیط هواپیما، قطار و اتوبوس در کشور است و در این مدت توانسته رضایت درصد قابل توجهی از کاربران را به دست بیاورد. </p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="service-card text-center">
-					<div class="service-card-img">
-						<img class="img-fluid" src="pics/home/service3.png" alt="">
-					</div>
-					<div class="service-card-body">
-						<h3>رزرو مقصد</h3>
-						<p>در سال‌های اخیر شتاب زندگی روزمره بالا رفته‌است و به‌تبع آن، ما زمان کمتری برای چیدن مقدمات سفر در اختیار داریم؛ مجبوریم از کمترین زمان‌هایمان بهترین استفاده را ببریم،</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="row g-4">
+            @if($services->count() > 0)
+                @foreach($services as $service)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top" alt="{{ $service->title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $service->title }}</h5>
+                            <p class="card-text">{{ $service->description }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                {{-- سرویس‌های پیش‌فرض در صورت خالی بودن دیتابیس --}}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <img src="{{ asset('pics/home/service1.png') }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">رزرو هتل</h5>
+                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <img src="{{ asset('pics/home/service2.png') }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">رزرو پرواز</h5>
+                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 text-center shadow-sm border-0">
+                        <img src="{{ asset('pics/home/service3.png') }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">رزرو مقصد</h5>
+                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
 </section>
 <!--================Service Area End =================-->
 
