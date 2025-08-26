@@ -12,12 +12,18 @@
 	<div class="container">
 		<div class="row align-items-center text-center text-md-right">
 			<div class="col-md-6 col-lg-5 mb-5 mb-md-0">
-				<h1>بیشتر سفر کنید تا خودتان را کشف کنید</h1>
-				<p class="text-justify">مسافرت به شما امکان می‌دهد که برای مدتی از دوستانی که همیشه در کنارشون بودید دور باشید. این جدایی به شما کمک میکنه عمق دوستی را بفهمید. وقتی از سفر برگشتید دوست دارید که باز هم ارتباطتان را با دوستانتون ادامه بدید یا در زمان دور بودن فهمیدید که رابطتون با اونها واقعا توخالی بوده.</p>
-				<a class="button button-hero mt-4" href="#">شروع</a>
+				<!-- داده‌های داینامیک -->
+				<h1>{{ $hero->title }}</h1>
+				<p class="text-justify">{{ $hero->description }}</p>
+				<a class="button button-hero mt-4" href="{{ $hero->button_url }}">{{ $hero->button_text }}</a>
 			</div>
 			<div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
-				<img class="img-fluid" src="pics/home/hero-img.png" alt="">
+				<!-- اگر تصویری وجود داشت، آن را نمایش بده -->
+				@if($hero->image)
+					<img class="img-fluid" src="{{ asset('storage/' . $hero->image) }}" alt="Hero Banner Image">
+				@else
+					<img class="img-fluid" src="pics/home/hero-img.png" alt="">
+				@endif
 			</div>
 		</div>
 	</div>
