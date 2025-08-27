@@ -202,68 +202,7 @@
 
 
 <!--================Testimonial section Start =================-->
-<section class="bg-gray section-padding magic-ball magic-ball-testimonial pb-xl-5">
-	<div class="container">
-		<div class="section-intro text-center pb-90px">
-			<img class="section-intro-img" src="pics/home/section-icon.png" alt="">
-			<h2>نظرات مشتریان ما</h2>
-			<p>برترین مشتری ها از آن ماست . ما قدر دان شما و نظرات ارزشمندتان هستیم</p>
-		</div>
-		<div class="owl-carousel owl-theme owl-rtl testimonial pb-xl-5 ">
-			<div class="testimonial__item">
-				<div class="row">
-					<div class="col-md-3 col-lg-2 align-self-center">
-						<div class="testimonial__img">
-							<img class="card-img rounded-0" src="pics/testimonial/t-slider1.png" alt="">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-10">
-						<div class="testimonial__content mt-3 mt-sm-0">
-							<h3>مریم میرزایی</h3>
-							<p>برنامه نویس ، تهران</p>
-							<p class="testimonial__i">من عاشق این سایت و تور هایی که میذاره شدم. واقعا کارتون حرف نداره. ادامه بدید و بدونید که من مشتری پر و پا قرص شما هستم...</p>
-							<span class="testimonial__icon"><i class="ti-quote-left"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="testimonial__item">
-				<div class="row">
-					<div class="col-md-3 col-lg-2 align-self-center">
-						<div class="testimonial__img">
-							<img class="card-img rounded-0" src="pics/testimonial/t-slider1.png" alt="">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-10">
-						<div class="testimonial__content mt-3 mt-sm-0">
-							<h3>فرید جهانبخش</h3>
-							<p>تور گاید ، مشهد</p>
-							<p class="testimonial__i">از وقتی با شما آشنا شدم دیگه نگرانی ندارم که چطور می تونم کسافرهامو به جاهایی ببرم که حسابی لذت ببرن و سفر براشون بی نهایت اکتشافی بشه...</p>
-							<span class="testimonial__icon"><i class="ti-quote-left"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="testimonial__item">
-				<div class="row">
-					<div class="col-md-3 col-lg-2 align-self-center">
-						<div class="testimonial__img">
-							<img class="card-img rounded-0" src="pics/testimonial/t-slider1.png" alt="">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-10">
-						<div class="testimonial__content mt-3 mt-sm-0">
-							<h3>رحیم مهرورز</h3>
-							<p>مدیر شرکت زورق ، شیراز</p>
-							<p class="testimonial__i">من عاشق این سایت و تور هایی که میذاره شدم. واقعا کارتون حرف نداره. ادامه بدید و بدونید که من مشتری پر و پا قرص شما هستم...</p>
-							<span class="testimonial__icon"><i class="ti-quote-left"></i></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+@include('admin.mainpage.testimonials.index')
 <!--================Testimonial section End =================-->
 
 

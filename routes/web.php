@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HeroBannerController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+
+Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
