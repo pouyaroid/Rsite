@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل مدیریت پیشرفته</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+   
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <i class="fas fa-gem"></i>
+            <span>پنل لوکس</span>
+        </div>
+    </div>
+
+    <nav class="nav-menu">
+        <div class="nav-group">
+            <div class="nav-group-title">اصلی</div>
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <i class="fas fa-home"></i>
+                <span>داشبورد</span>
+            </a>
+            <a href="#" class="nav-item" data-section="analytics">
+                <i class="fas fa-chart-line"></i>
+                <span>آنالیتیکس</span>
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-group-title">مدیریت</div>
+            <a href="#" class="nav-item" data-section="users">
+                <i class="fas fa-users"></i>
+                <span>کاربران</span>
+                <span class="nav-badge">12</span>
+            </a>
+            <a href="#" class="nav-item" data-section="products">
+                <i class="fas fa-box"></i>
+                <span>محصولات</span>
+            </a>
+            <a href="#" class="nav-item" data-section="orders">
+                <i class="fas fa-shopping-cart"></i>
+                <span>سفارشات</span>
+                <span class="nav-badge">5</span>
+            </a>
+            <a href="#" class="nav-item" data-section="customers">
+                <i class="fas fa-user-friends"></i>
+                <span>مشتریان</span>
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-group-title">سیستم</div>
+            <a href="#" class="nav-item" data-section="settings">
+                <i class="fas fa-cog"></i>
+                <span>تنظیمات</span>
+            </a>
+            <a href="#" class="nav-item" data-section="reports">
+                <i class="fas fa-file-alt"></i>
+                <span>گزارشات</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>خروج</span>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" id="mainContent">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="جستجو در پنل مدیریت...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button class="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+
+            <div class="user-menu">
+                <div class="user-avatar">AM</div>
+                <div class="user-info">
+                    <h4>احمد محمدی</h4>
+                    <p>مدیر سیستم</p>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+        <!-- Dashboard Section -->
+        <div class="content-section active" id="dashboard">
+            <div class="page-header">
+                <h1 class="page-title">داشبورد مدیریت</h1>
+                <p class="page-subtitle">نمای کلی از وضعیت سیستم و آمار کلیدی</p>
+                <div class="breadcrumb">
+                    <a href="#">خانه</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>داشبورد</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-value" data-target="15847">0</div>
+                            <div class="stat-label">کل کاربران</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>12% افزایش</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-value" data-target="2384">0</div>
+                            <div class="stat-label">سفارشات ماه</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>8% افزایش</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon secondary">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-value" data-target="847500000">0</div>
+                            <div class="stat-label">درآمد (تومان)</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>25% افزایش</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon success">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-value" data-target="1247">0</div>
+                            <div class="stat-label">محصولات فعال</div>
+                            <div class="stat-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>3% کاهش</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon warning">
+                            <i class="fas fa-box"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line"></i>
+                        نمودار فروش
+                    </h3>
+                    <div class="card-actions">
+                        <button class="btn btn-sm btn-secondary">
+                            <i class="fas fa-download"></i>
+                            دانلود گزارش
+                        </button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock"></i>
+                        آخرین فعالیت‌ها
+                    </h3>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>کاربر</th>
+                                <th>فعالیت</th>
+                                <th>زمان</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>علی احمدی</td>
+                                <td>ثبت سفارش جدید</td>
+                                <td>2 دقیقه پیش</td>
+                                <td><span class="btn btn-sm btn-success">موفق</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>مریم کریمی</td>
+                                <td>ویرایش پروفایل</td>
+                                <td>5 دقیقه پیش</td>
+                                <td><span class="btn btn-sm btn-success">موفق</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>حسن رضایی</td>
+                                <td>لغو سفارش</td>
+                                <td>10 دقیقه پیش</td>
+                                <td><span class="btn btn-sm btn-danger">لغو شده</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div class="content-section" id="analytics">
+            <div class="page-header">
+                <h1 class="page-title">آنالیتیکس و گزارشات</h1>
+                <p class="page-subtitle">تحلیل عمیق داده‌ها و آمارهای سیستم</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i>
+                        آمار بازدید
+                    </h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div class="content-section" id="users">
+            <div class="page-header">
+                <h1 class="page-title">مدیریت کاربران</h1>
+                <p class="page-subtitle">مشاهده و مدیریت کاربران سیستم</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-users"></i>
+                        لیست کاربران
+                    </h3>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-plus"></i>
+                            افزودن کاربر
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>نام</th>
+                                <th>ایمیل</th>
+                                <th>نقش</th>
+                                <th>تاریخ عضویت</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>احمد محمدی</td>
+                                <td>ahmad@example.com</td>
+                                <td>مدیر</td>
+                                <td>1402/01/15</td>
+                                <td><span class="btn btn-sm btn-success">فعال</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">ویرایش</button>
+                                    <button class="btn btn-sm btn-danger">حذف</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other sections... -->
+        <div class="content-section" id="products">
+            <div class="page-header">
+                <h1 class="page-title">مدیریت محصولات</h1>
+                <p class="page-subtitle">مشاهده و مدیریت محصولات فروشگاه</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">محصولات در حال توسعه...</h3>
+                </div>
+                <p>این بخش در حال توسعه است.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="orders">
+            <div class="page-header">
+                <h1 class="page-title">مدیریت سفارشات</h1>
+                <p class="page-subtitle">پیگیری و مدیریت سفارشات</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">سفارشات در حال توسعه...</h3>
+                </div>
+                <p>این بخش در حال توسعه است.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="customers">
+            <div class="page-header">
+                <h1 class="page-title">مدیریت مشتریان</h1>
+                <p class="page-subtitle">مشاهده و مدیریت اطلاعات مشتریان</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">مشتریان در حال توسعه...</h3>
+                </div>
+                <p>این بخش در حال توسعه است.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="settings">
+            <div class="page-header">
+                <h1 class="page-title">تنظیمات سیستم</h1>
+                <p class="page-subtitle">پیکربندی عمومی سیستم</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">تنظیمات در حال توسعه...</h3>
+                </div>
+                <p>این بخش در حال توسعه است.</p>
+            </div>
+        </div>
+
+        <div class="content-section" id="reports">
+            <div class="page-header">
+                <h1 class="page-title">گزارشات تفصیلی</h1>
+                <p class="page-subtitle">گزارش‌های مالی و عملیاتی</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">گزارشات در حال توسعه...</h3>
+                </div>
+                <p>این بخش در حال توسعه است.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

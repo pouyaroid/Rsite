@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HeroBannerController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\HomeController;
@@ -30,3 +31,5 @@ Route::post('/services', [ServiceController::class, 'store'])->name('services.st
 Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
 Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
 Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
+
+Route::resource('packages', PackageController::class);

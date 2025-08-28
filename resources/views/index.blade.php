@@ -9,24 +9,27 @@
 
 <!--================Hero Banner Area Start =================-->
 {{-- <section class="hero-banner magic-ball">
-	<div class="container">
-		<div class="row align-items-center text-center text-md-right">
-			<div class="col-md-6 col-lg-5 mb-5 mb-md-0">
-				<!-- داده‌های داینامیک -->
-				<h1>{{ $hero->title }}</h1>
-				<p class="text-justify">{{ $hero->description }}</p>
-				<a class="button button-hero mt-4" href="{{ $hero->button_url }}">{{ $hero->button_text }}</a>
-			</div>
-			<div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
-				<!-- اگر تصویری وجود داشت، آن را نمایش بده -->
-				@if($hero->image)
-					<img class="img-fluid" src="{{ asset('storage/' . $hero->image) }}" alt="Hero Banner Image">
-				@else
-					<img class="img-fluid" src="pics/home/hero-img.png" alt="">
-				@endif
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row align-items-center text-center text-md-right">
+            <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
+                <!-- داده‌های داینامیک یا پیش‌فرض -->
+                <h1>{{ $hero->title ?? 'بیشتر سفر کنید تا خودتان را کشف کنید' }}</h1>
+                <p class="text-justify">{{ $hero->description ?? 'یک متن پیش‌فرض برای توضیحات بنویسید.' }}</p>
+                <a class="button button-hero mt-4"
+                   href="{{ $hero->button_url ?? '#' }}">
+                   {{ $hero->button_text ?? 'شروع کنید' }}
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
+                <!-- تصویر -->
+                @if(!empty($hero) && $hero->image)
+                    <img class="img-fluid" src="{{ asset('storage/' . $hero->image) }}" alt="Hero Banner Image">
+                @else
+                    <img class="img-fluid" src="pics/home/hero-img.png" alt="">
+                @endif
+            </div>
+        </div>
+    </div>
 </section> --}}
 <!--================Hero Banner Area End =================-->
 
@@ -92,115 +95,10 @@
 
 
 <!--================About Area Start =================-->
-<section class="bg-gray section-padding magic-ball magic-ball-about">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-7 col-md-6 mb-4 mb-md-0">
-				<div class="about-img">
-					<img class="img-fluid" src="pics/home/about-img.png" alt="">
-				</div>
-			</div>
-			<div class="col-lg-5 col-md-6 align-self-center about-content">
-				<h2>جوهر روح انسان اکتشافات است </h2>
-				<p>شما می‌تونید مطلب و کتاب‌های زیادی در مورد تخت جمشید، پاسارگاد، روم باستان و ... بخونید. حتی در مورد نمونه‌های خارجی فیلم هم ببینید اما مطمئن باشید وقتی برای اولین بار آنجا را ببینید تازه متوجه آنچه که قبلا خوانده یا شنیده‌اید می‌شوید.</p>
-				<a class="button" href="#">بیشتر بدانید</a>
-			</div>
-		</div>
-	</div>
-</section>
-<!--================About Area End =================-->
-
-<!--================Tour section Start =================-->
-<section class="section-margin pb-xl-5">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="tour-card">
-					<img class="card-img rounded-0" src="pics/home/tour1.png" alt="">
-					<div class="tour-card-overlay">
-						<div class="media">
-							<div class="media-body">
-								<h4>تور پاریس</h4>
-								<small>5 روز</small>
-								<p>ما به درستی گردشگر خود را راهنمایی میکنیم</p>
-							</div>
-							<div class="media-price">
-								<h4 class="text-primary"> 5 میلیون تومان</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-lg-10 offset-lg-1">
-						<div class="tour-content">
-							<h2>ما به شما پیشنهاد جدیدترین تورمان را میدهیم</h2>
-							<p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="tour-card">
-					<img class="card-img rounded-0" src="pics/home/tour2.png" alt="">
-					<div class="tour-card-overlay">
-						<div class="media">
-							<div class="media-body">
-								<h4>تور هند</h4>
-								<small>5 روز</small>
-								<p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-							</div>
-							<div class="media-price">
-								<h4 class="text-primary">3 میلیون تومان</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6 col-lg-7">
-				<div class="tour-card">
-					<img class="card-img rounded-0" src="pics/home/tour3.png" alt="">
-					<div class="tour-card-overlay">
-						<div class="media">
-							<div class="media-body">
-								<h4>تور هلند</h4>
-								<small>8 روز</small>
-								<p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-							</div>
-							<div class="media-price">
-								<h4 class="text-primary">10 میلیون تومان</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-5">
-				<div class="tour-card">
-					<img class="card-img rounded-0" src="pics/home/tour4.png" alt="">
-					<div class="tour-card-overlay">
-						<div class="media">
-							<div class="media-body">
-								<h4>تور فرانسه</h4>
-								<small>یک هفته</small>
-								<p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-							</div>
-							<div class="media-price">
-								<h4 class="text-primary">20 میلیون تومان</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+@include('admin.mainpage.herobanner.index')
 <!--================Tour section End =================-->
 
-
+@include('admin.mainpage.packages.index')
 <!--================Testimonial section Start =================-->
 @include('admin.mainpage.testimonials.index')
 <!--================Testimonial section End =================-->
