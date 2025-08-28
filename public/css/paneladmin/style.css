@@ -1,8 +1,8 @@
   :root {
-            --primary: #3A0519;
-            --primary-light: #670D2F;
-            --secondary: #A53860;
-            --accent: #EF88AD;
+            --primary: #382d80;
+            --primary-light: #1E88E5;
+            --secondary: #2196F3;
+            --accent: #00B0FF;
             --dark: #1a0a0e;
             --light: #fdf2f8;
             --white: #ffffff;
@@ -35,7 +35,7 @@
             right: 0;
             width: var(--sidebar-width);
             height: 100vh;
-            background: rgba(58, 5, 25, 0.95);
+            background: rgba(29, 5, 58, 0.95);
             backdrop-filter: blur(20px);
             border-left: 1px solid rgba(239, 136, 173, 0.2);
             z-index: 1000;
@@ -56,13 +56,13 @@
         }
 
         .sidebar::-webkit-scrollbar-thumb {
-            background: rgba(239, 136, 173, 0.3);
+            background: rgba(17, 6, 114, 0.3);
             border-radius: 2px;
         }
 
         .sidebar-header {
             padding: 20px;
-            border-bottom: 1px solid rgba(239, 136, 173, 0.1);
+            border-bottom: 1px solid rgba(71, 16, 200, 0.1);
             text-align: center;
         }
 
@@ -93,7 +93,7 @@
         }
 
         .nav-group-title {
-            color: rgba(239, 136, 173, 0.6);
+            color: rgba(136, 198, 239, 0.6);
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
@@ -110,7 +110,7 @@
             align-items: center;
             gap: 12px;
             padding: 14px 20px;
-            color: rgba(239, 136, 173, 0.8);
+            color: rgba(133, 174, 255, 0.8);
             text-decoration: none;
             transition: all 0.2s ease;
             position: relative;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\HeroBannerController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -33,3 +34,4 @@ Route::get('/testimonials/create', [TestimonialController::class, 'create'])->na
 Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
 
 Route::resource('packages', PackageController::class);
+Route::get('/paneladmin',[AdminPanelController::class,'index']);
