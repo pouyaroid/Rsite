@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\HeroBannerController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,5 @@ Route::post('/testimonials', [TestimonialController::class, 'store'])->name('tes
 
 Route::resource('packages', PackageController::class);
 Route::get('/paneladmin',[AdminPanelController::class,'index']);
+
+Route::get('/settings',[SettingsController::class,'index'])->name('admin.settings');

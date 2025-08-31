@@ -1,402 +1,370 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پنل مدیریت پیشرفته</title>
-    {{-- <link rel="stylesheet" href="style.css"> --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/paneladmin/style.css') }}">
+    <meta charset="UTF-8" />
+    <title>@yield('title', 'پنل مدیریت')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font/dist/font-face.css" rel="stylesheet" />
     
-    <script src="js/paneladmin/script.js"></script>
-   
+    <style>
+        /*
+        ===================================================
+        فونت و متغیرهای اصلی
+        ===================================================
+        */
+        :root {
+            --sidebar-width-lg: 280px;
+            --sidebar-transition-duration: 0.3s;
+            --primary-color: #1a2a4b; /* آبی تیره برای پس‌زمینه سایدبار */
+            --secondary-color: #273b64; /* رنگ روشن‌تر برای پس‌زمینه المان‌ها */
+            --accent-color: #3b82f6; /* آبی روشن برای لینک‌ها و هایلایت */
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --active-color: #e3f2fd; /* رنگ پس‌زمینه فعال */
+            --active-text: #1a2a4b; /* رنگ متن فعال */
+            --danger-color: #f87171;
+            --danger-hover: #ef4444;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #f1f5f9; /* پس‌زمینه روشن */
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #334155;
+            transition: background-color 0.3s ease;
+        }
+
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+            background: #f1f5f9;
+        }
+
+        /*
+        ===================================================
+        سایدبار (منوی کناری)
+        ===================================================
+        */
+        .sidebar {
+            width: var(--sidebar-width-lg);
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding-top: 1.5rem;
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1050;
+            display: flex;
+            flex-direction: column;
+            transition: right var(--sidebar-transition-duration) ease, box-shadow 0.3s ease;
+            right: calc(-1 * var(--sidebar-width-lg));
+        }
+
+        @media (min-width: 992px) {
+            .sidebar {
+                right: 0;
+            }
+        }
+
+        .sidebar.show {
+            right: 0;
+        }
+
+        .sidebar-scrollable {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        /* مخفی کردن اسکرول‌بار در دسکتاپ */
+        @media (min-width: 992px) {
+            .sidebar-scrollable {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .sidebar-scrollable::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .sidebar-header {
+            padding: 0 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-close-menu {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .btn-close-menu:hover {
+            color: var(--text-light);
+        }
+        @media (max-width: 991.98px) {
+            .btn-close-menu {
+                display: inline-block;
+            }
+        }
+
+        .user-info {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            user-select: none;
+            border-radius: 8px;
+            margin: 0.5rem 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .user-info i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        /*
+        ===================================================
+        لینک‌های منو
+        ===================================================
+        */
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.75rem;
+            font-weight: 400;
+            color: var(--text-light);
+            border-right: 4px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .sidebar .nav-link i {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: var(--secondary-color);
+            border-right-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .sidebar .nav-link:hover i {
+            color: var(--accent-color);
+        }
+
+        .sidebar .nav-link.active {
+            background-color: var(--active-color);
+            color: var(--active-text);
+            font-weight: 600;
+            border-right-color: var(--active-text);
+        }
+
+        .sidebar .nav-link.active i {
+            color: var(--active-text);
+        }
+
+        .sidebar .nav-link:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .sidebar-menu {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar form button.nav-link {
+            width: 100%;
+            text-align: start;
+            padding-left: 1.75rem;
+            color: var(--danger-color);
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar form button.nav-link:hover {
+            background-color: rgba(248, 113, 113, 0.1);
+            color: var(--danger-hover);
+            border-right-color: var(--danger-hover);
+        }
+
+        /*
+        ===================================================
+        محتوای اصلی و المان‌ها
+        ===================================================
+        */
+        .content-wrapper {
+            flex-grow: 1;
+            padding: 2rem 2.5rem;
+            min-height: 100vh;
+            background: #f1f5f9;
+            transition: margin-right var(--sidebar-transition-duration) ease;
+            margin-right: 0;
+            position: relative;
+        }
+
+        @media (min-width: 992px) {
+            .content-wrapper {
+                margin-right: var(--sidebar-width-lg);
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            transition: opacity var(--sidebar-transition-duration) ease;
+            opacity: 0;
+        }
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .btn-toggle {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            font-size: 1rem;
+            padding: 0.65rem 1.4rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-weight: 500;
+        }
+        .btn-toggle:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .btn-toggle i {
+            vertical-align: middle;
+            font-size: 1.6rem;
+            margin-left: 0.5rem;
+        }
+
+        .alert {
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+    </style>
+    @stack('styles')
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <div class="logo">
-            <i class="fas fa-gem"></i>
-            <span>پنل لوکس</span>
-        </div>
-    </div>
-
-    <nav class="nav-menu">
-        <div class="nav-group">
-            <div class="nav-group-title">اصلی</div>
-            <a href="#" class="nav-item active" data-section="dashboard">
-                <i class="fas fa-home"></i>
-                <span>داشبورد</span>
-            </a>
-            <a href="#" class="nav-item" data-section="analytics">
-                <i class="fas fa-chart-line"></i>
-                <span>آنالیتیکس</span>
-            </a>
+<div class="wrapper">
+    <nav class="sidebar" id="sidebar" aria-label="منوی اصلی">
+        <div class="sidebar-header" tabindex="0">
+            <div>
+                <i class="bi bi-speedometer2"></i> CRM رشد
+            </div>
+            <button class="btn-close-menu" id="closeMenuBtn" aria-label="بستن منو">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
 
-        <div class="nav-group">
-            <div class="nav-group-title">مدیریت</div>
-            <a href="#" class="nav-item" data-section="users">
-                <i class="fas fa-users"></i>
-                <span>کاربران</span>
-                <span class="nav-badge">12</span>
-            </a>
-            <a href="#" class="nav-item" data-section="products">
-                <i class="fas fa-box"></i>
-                <span>محصولات</span>
-            </a>
-            <a href="#" class="nav-item" data-section="orders">
-                <i class="fas fa-shopping-cart"></i>
-                <span>سفارشات</span>
-                <span class="nav-badge">5</span>
-            </a>
-            <a href="#" class="nav-item" data-section="customers">
-                <i class="fas fa-user-friends"></i>
-                <span>مشتریان</span>
-            </a>
+        <div class="user-info" aria-label="اطلاعات کاربر">
+            <i class="bi bi-person-circle"></i>
+            {{ auth()->user()->name ?? 'کاربر ناشناس' }}
         </div>
-
-        <div class="nav-group">
-            <div class="nav-group-title">سیستم</div>
-            <a href="#" class="nav-item" data-section="settings">
-                <i class="fas fa-cog"></i>
-                <span>تنظیمات</span>
-            </a>
-            <a href="#" class="nav-item" data-section="reports">
-                <i class="fas fa-file-alt"></i>
-                <span>گزارشات</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>خروج</span>
-            </a>
-        </div>
+        
+        <div class="sidebar-scrollable">
+            <ul class="nav flex-column mt-3">
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings') }}" class="nav-link {{ request()->routeIs('complaints.admin.index') ? 'active' : '' }}">
+                        <i class="bi bi-inbox-fill"></i>  تنظیمات صفحه اصلی
+                    </a>
+                </li>
+    
     </nav>
-</div>
 
-<!-- Main Content -->
-<div class="main-content" id="mainContent">
-    <!-- Header -->
-    <header class="header">
-        <div class="header-left">
-            <button class="toggle-btn" id="toggleBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="جستجو در پنل مدیریت...">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-        </div>
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-        <div class="header-right">
-            <button class="notification-btn">
-                <i class="fas fa-bell"></i>
-                <span class="notification-badge">3</span>
-            </button>
-
-            <div class="user-menu">
-                <div class="user-avatar">AM</div>
-                <div class="user-info">
-                    <h4>احمد محمدی</h4>
-                    <p>مدیر سیستم</p>
+    <main class="content-wrapper">
+        <button class="btn btn-toggle d-lg-none" id="menuToggleBtn" aria-label="بازکردن منو">
+            <i class="bi bi-list"></i> منو
+        </button>
+        
+        {{-- نمایش نوتیفیکیشن‌های خوانده‌نشده --}}
+        {{-- @if(auth()->check() && auth()->user()->unreadNotifications->count())
+            <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+                <div>
+                    <i class="bi bi-bell-fill me-2"></i>
+                    شما {{ auth()->user()->unreadNotifications->count() }} اعلان خوانده‌نشده دارید.
                 </div>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </header>
-
-    <!-- Content -->
-    <main class="content">
-        <!-- Dashboard Section -->
-        <div class="content-section active" id="dashboard">
-            <div class="page-header">
-                <h1 class="page-title">داشبورد مدیریت</h1>
-                <p class="page-subtitle">نمای کلی از وضعیت سیستم و آمار کلیدی</p>
-                <div class="breadcrumb">
-                    <a href="#">خانه</a>
-                    <span class="breadcrumb-separator">/</span>
-                    <span>داشبورد</span>
+                <div>
+                    <a href="{{ route('notifications.index') }}" class="btn btn-sm btn-outline-dark">مشاهده اعلان‌ها</a>
                 </div>
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div>
-                            <div class="stat-value" data-target="15847">0</div>
-                            <div class="stat-label">کل کاربران</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>12% افزایش</span>
-                            </div>
-                        </div>
-                        <div class="stat-icon primary">
-                            <i class="fas fa-users"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div>
-                            <div class="stat-value" data-target="2384">0</div>
-                            <div class="stat-label">سفارشات ماه</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>8% افزایش</span>
-                            </div>
-                        </div>
-                        <div class="stat-icon secondary">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div>
-                            <div class="stat-value" data-target="847500000">0</div>
-                            <div class="stat-label">درآمد (تومان)</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>25% افزایش</span>
-                            </div>
-                        </div>
-                        <div class="stat-icon success">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div>
-                            <div class="stat-value" data-target="1247">0</div>
-                            <div class="stat-label">محصولات فعال</div>
-                            <div class="stat-change negative">
-                                <i class="fas fa-arrow-down"></i>
-                                <span>3% کاهش</span>
-                            </div>
-                        </div>
-                        <div class="stat-icon warning">
-                            <i class="fas fa-box"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-chart-line"></i>
-                        نمودار فروش
-                    </h3>
-                    <div class="card-actions">
-                        <button class="btn btn-sm btn-secondary">
-                            <i class="fas fa-download"></i>
-                            دانلود گزارش
-                        </button>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="salesChart"></canvas>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-clock"></i>
-                        آخرین فعالیت‌ها
-                    </h3>
-                </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>کاربر</th>
-                                <th>فعالیت</th>
-                                <th>زمان</th>
-                                <th>وضعیت</th>
-                                <th>عملیات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>علی احمدی</td>
-                                <td>ثبت سفارش جدید</td>
-                                <td>2 دقیقه پیش</td>
-                                <td><span class="btn btn-sm btn-success">موفق</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>مریم کریمی</td>
-                                <td>ویرایش پروفایل</td>
-                                <td>5 دقیقه پیش</td>
-                                <td><span class="btn btn-sm btn-success">موفق</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>حسن رضایی</td>
-                                <td>لغو سفارش</td>
-                                <td>10 دقیقه پیش</td>
-                                <td><span class="btn btn-sm btn-danger">لغو شده</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-secondary">جزئیات</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Analytics Section -->
-        <div class="content-section" id="analytics">
-            <div class="page-header">
-                <h1 class="page-title">آنالیتیکس و گزارشات</h1>
-                <p class="page-subtitle">تحلیل عمیق داده‌ها و آمارهای سیستم</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-chart-bar"></i>
-                        آمار بازدید
-                    </h3>
-                </div>
-                <div class="chart-container">
-                    <canvas id="analyticsChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Users Section -->
-        <div class="content-section" id="users">
-            <div class="page-header">
-                <h1 class="page-title">مدیریت کاربران</h1>
-                <p class="page-subtitle">مشاهده و مدیریت کاربران سیستم</p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-users"></i>
-                        لیست کاربران
-                    </h3>
-                    <div class="card-actions">
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-plus"></i>
-                            افزودن کاربر
-                        </button>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>نام</th>
-                                <th>ایمیل</th>
-                                <th>نقش</th>
-                                <th>تاریخ عضویت</th>
-                                <th>وضعیت</th>
-                                <th>عملیات</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>احمد محمدی</td>
-                                <td>ahmad@example.com</td>
-                                <td>مدیر</td>
-                                <td>1402/01/15</td>
-                                <td><span class="btn btn-sm btn-success">فعال</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-secondary">ویرایش</button>
-                                    <button class="btn btn-sm btn-danger">حذف</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Other sections... -->
-        <div class="content-section" id="products">
-            <div class="page-header">
-                <h1 class="page-title">مدیریت محصولات</h1>
-                <p class="page-subtitle">مشاهده و مدیریت محصولات فروشگاه</p>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">محصولات در حال توسعه...</h3>
-                </div>
-                <p>این بخش در حال توسعه است.</p>
-            </div>
-        </div>
-
-        <div class="content-section" id="orders">
-            <div class="page-header">
-                <h1 class="page-title">مدیریت سفارشات</h1>
-                <p class="page-subtitle">پیگیری و مدیریت سفارشات</p>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">سفارشات در حال توسعه...</h3>
-                </div>
-                <p>این بخش در حال توسعه است.</p>
-            </div>
-        </div>
-
-        <div class="content-section" id="customers">
-            <div class="page-header">
-                <h1 class="page-title">مدیریت مشتریان</h1>
-                <p class="page-subtitle">مشاهده و مدیریت اطلاعات مشتریان</p>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">مشتریان در حال توسعه...</h3>
-                </div>
-                <p>این بخش در حال توسعه است.</p>
-            </div>
-        </div>
-
-        <div class="content-section" id="settings">
-            <div class="page-header">
-                <h1 class="page-title">تنظیمات سیستم</h1>
-                <p class="page-subtitle">پیکربندی عمومی سیستم</p>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">تنظیمات در حال توسعه...</h3>
-                </div>
-                <p>این بخش در حال توسعه است.</p>
-            </div>
-        </div>
-
-        <div class="content-section" id="reports">
-            <div class="page-header">
-                <h1 class="page-title">گزارشات تفصیلی</h1>
-                <p class="page-subtitle">گزارش‌های مالی و عملیاتی</p>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">گزارشات در حال توسعه...</h3>
-                </div>
-                <p>این بخش در حال توسعه است.</p>
-            </div>
-        </div>
+        @endif --}}
+        
+        @yield('content')
     </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('menuToggleBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+    function toggleSidebar() {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+    }
+
+    toggleBtn.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', closeSidebar);
+    closeMenuBtn.addEventListener('click', closeSidebar);
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 992) {
+            closeSidebar();
+        }
+    });
+</script>
 
 </body>
 </html>
