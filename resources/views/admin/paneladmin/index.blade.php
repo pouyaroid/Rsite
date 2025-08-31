@@ -1,370 +1,283 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <title>@yield('title', 'پنل مدیریت')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد پنل ادمین</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font/dist/font-face.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09AyGasBodEqbWPlusYKZ5eeqypNomaU3de3dd5fIavUiC2N7SQ/" crossorigin="anonymous">
     
     <style>
-        /*
-        ===================================================
-        فونت و متغیرهای اصلی
-        ===================================================
-        */
+        /* --- CSS Variables --- */
         :root {
-            --sidebar-width-lg: 280px;
-            --sidebar-transition-duration: 0.3s;
-            --primary-color: #1a2a4b; /* آبی تیره برای پس‌زمینه سایدبار */
-            --secondary-color: #273b64; /* رنگ روشن‌تر برای پس‌زمینه المان‌ها */
-            --accent-color: #3b82f6; /* آبی روشن برای لینک‌ها و هایلایت */
-            --text-light: #f1f5f9;
-            --text-muted: #94a3b8;
-            --active-color: #e3f2fd; /* رنگ پس‌زمینه فعال */
-            --active-text: #1a2a4b; /* رنگ متن فعال */
-            --danger-color: #f87171;
-            --danger-hover: #ef4444;
+            --primary-color: #4a69bd;
+            --primary-hover-color: #6082d4;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text-color: #ecf0f1;
+            --sidebar-active-bg: #34495e;
+            --main-bg: #f4f7fa;
+            --card-bg: #ffffff;
+            --text-color: #34495e;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            
+            /* Bootstrap theme colors override */
+            --bs-primary: var(--primary-color);
+            --bs-success: #27ae60;
+            --bs-warning: #f39c12;
+            --bs-info: #3498db;
+            --bs-danger: #e74c3c;
         }
 
+        /* --- Global & Reset --- */
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background: #f1f5f9; /* پس‌زمینه روشن */
-            min-height: 100vh;
-            overflow-x: hidden;
-            color: #334155;
-            transition: background-color 0.3s ease;
+            direction: rtl;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
-        .wrapper {
+        /* --- Main Layout --- */
+        .admin-panel {
             display: flex;
             min-height: 100vh;
-            background: #f1f5f9;
         }
 
-        /*
-        ===================================================
-        سایدبار (منوی کناری)
-        ===================================================
-        */
+        /* --- Sidebar --- */
         .sidebar {
-            width: var(--sidebar-width-lg);
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding-top: 1.5rem;
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text-color);
+            flex-shrink: 0;
             position: fixed;
-            right: 0;
             top: 0;
-            bottom: 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1050;
-            display: flex;
-            flex-direction: column;
-            transition: right var(--sidebar-transition-duration) ease, box-shadow 0.3s ease;
-            right: calc(-1 * var(--sidebar-width-lg));
-        }
-
-        @media (min-width: 992px) {
-            .sidebar {
-                right: 0;
-            }
-        }
-
-        .sidebar.show {
             right: 0;
+            bottom: 0;
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
         }
+        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid var(--sidebar-active-bg); }
+        .sidebar-header h3 i { margin-left: 10px; }
+        .sidebar-nav ul { list-style: none; padding: 20px 0; }
+        .sidebar-nav a { display: flex; align-items: center; color: var(--sidebar-text-color); text-decoration: none; padding: 15px 25px; transition: background-color 0.2s; }
+        .sidebar-nav a i { font-size: 18px; width: 25px; margin-left: 15px; text-align: center; }
+        .sidebar-nav a:hover { background-color: var(--primary-hover-color); }
+        .sidebar-nav a.active { background-color: var(--primary-color); border-right: 4px solid var(--sidebar-text-color); padding-right: 21px; }
 
-        .sidebar-scrollable {
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        
-        /* مخفی کردن اسکرول‌بار در دسکتاپ */
-        @media (min-width: 992px) {
-            .sidebar-scrollable {
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .sidebar-scrollable::-webkit-scrollbar {
-                display: none;
-            }
-        }
-
-        .sidebar-header {
-            padding: 0 1.5rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            letter-spacing: 1px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-close-menu {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--accent-color);
-            font-size: 1.6rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        .btn-close-menu:hover {
-            color: var(--text-light);
-        }
-        @media (max-width: 991.98px) {
-            .btn-close-menu {
-                display: inline-block;
-            }
-        }
-
-        .user-info {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 500;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            user-select: none;
-            border-radius: 8px;
-            margin: 0.5rem 1rem;
-            transition: background-color 0.3s ease;
-        }
-        .user-info i {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        /*
-        ===================================================
-        لینک‌های منو
-        ===================================================
-        */
-        .sidebar .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.85rem 1.75rem;
-            font-weight: 400;
-            color: var(--text-light);
-            border-right: 4px solid transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-        }
-
-        .sidebar .nav-link i {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            transition: color 0.3s ease;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: var(--secondary-color);
-            border-right-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .sidebar .nav-link:hover i {
-            color: var(--accent-color);
-        }
-
-        .sidebar .nav-link.active {
-            background-color: var(--active-color);
-            color: var(--active-text);
-            font-weight: 600;
-            border-right-color: var(--active-text);
-        }
-
-        .sidebar .nav-link.active i {
-            color: var(--active-text);
-        }
-
-        .sidebar .nav-link:not(:last-child) {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .sidebar-menu {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar form button.nav-link {
-            width: 100%;
-            text-align: start;
-            padding-left: 1.75rem;
-            color: var(--danger-color);
-            font-weight: 500;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar form button.nav-link:hover {
-            background-color: rgba(248, 113, 113, 0.1);
-            color: var(--danger-hover);
-            border-right-color: var(--danger-hover);
-        }
-
-        /*
-        ===================================================
-        محتوای اصلی و المان‌ها
-        ===================================================
-        */
+        /* --- Content Wrapper --- */
         .content-wrapper {
             flex-grow: 1;
-            padding: 2rem 2.5rem;
-            min-height: 100vh;
-            background: #f1f5f9;
-            transition: margin-right var(--sidebar-transition-duration) ease;
-            margin-right: 0;
-            position: relative;
+            margin-right: 260px;
+            transition: margin-right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        header { background-color: var(--card-bg); padding: 15px 30px; box-shadow: 0 2px 4px var(--shadow-color); position: sticky; top: 0; z-index: 900; display: flex; align-items: center; }
+        .menu-toggle-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); }
+        main { flex-grow: 1; } /* Main takes remaining space */
+
+        /*
+        ========================================
+        >>>>> NEW STYLES FOR DASHBOARD CARDS <<<<<
+        ========================================
+        */
+        .dashboard-card {
+            overflow: hidden; /* Ensures rounded corners are applied correctly */
         }
 
-        @media (min-width: 992px) {
-            .content-wrapper {
-                margin-right: var(--sidebar-width-lg);
-            }
+        .bg-gradient-primary {
+            background: linear-gradient(45deg, #4a69bd, #6082d4);
+        }
+        
+        .card-header-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .z-index-1 {
+            z-index: 1;
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1040;
-            transition: opacity var(--sidebar-transition-duration) ease;
-            opacity: 0;
-        }
-        .overlay.show {
-            display: block;
-            opacity: 1;
+        .dashboard-link-card {
+            background-color: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 1rem;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        .btn-toggle {
-            background-color: var(--primary-color);
-            color: var(--accent-color);
-            border: none;
-            font-size: 1rem;
-            padding: 0.65rem 1.4rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+        .dashboard-link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-link-card .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
             margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            font-weight: 500;
-        }
-        .btn-toggle:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .btn-toggle i {
-            vertical-align: middle;
-            font-size: 1.6rem;
-            margin-left: 0.5rem;
         }
 
-        .alert {
-            border-radius: 0.75rem;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        .dashboard-link-card .title {
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-link-card .description {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* --- Responsive for Mobile --- */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(100%); }
+            .content-wrapper { margin-right: 0; }
+            .admin-panel.sidebar-open .sidebar { transform: translateX(0); }
+            .menu-toggle-btn { display: block; }
         }
     </style>
-    @stack('styles')
 </head>
 <body>
 
-<div class="wrapper">
-    <nav class="sidebar" id="sidebar" aria-label="منوی اصلی">
-        <div class="sidebar-header" tabindex="0">
-            <div>
-                <i class="bi bi-speedometer2"></i> CRM رشد
+    <div class="admin-panel">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fa-solid fa-shield-halved"></i> پنل مدیریت</h3>
             </div>
-            <button class="btn-close-menu" id="closeMenuBtn" aria-label="بستن منو">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="active"><i class="fa-solid fa-gauge-high"></i><span>داشبورد</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-users"></i><span>کاربران</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-box-open"></i><span>محصولات</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-shopping-cart"></i><span>سفارشات</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-chart-pie"></i><span>گزارش‌ها</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-comments"></i><span>نظرات</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-gear"></i><span>تنظیمات</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-sign-out-alt"></i><span>خروج</span></a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <div class="user-info" aria-label="اطلاعات کاربر">
-            <i class="bi bi-person-circle"></i>
-            {{ auth()->user()->name ?? 'کاربر ناشناس' }}
-        </div>
-        
-        <div class="sidebar-scrollable">
-            <ul class="nav flex-column mt-3">
-                <li class="nav-item">
-                    <a href="{{ route('admin.settings') }}" class="nav-link {{ request()->routeIs('complaints.admin.index') ? 'active' : '' }}">
-                        <i class="bi bi-inbox-fill"></i>  تنظیمات صفحه اصلی
-                    </a>
-                </li>
-    
-    </nav>
+        <div class="content-wrapper">
+            <header>
+                <button id="menu-toggle" class="menu-toggle-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </header>
 
-    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+            <main>
+                <div class="container-fluid py-4">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="card shadow-lg border-0 rounded-5 dashboard-card">
+                                <div class="card-header bg-gradient-primary text-white text-center py-5 rounded-top-5 position-relative">
+                                    <div class="card-header-overlay position-absolute top-0 start-0 w-100 h-100 rounded-top-5"></div>
+                                    <h2 class="card-title fw-bold mb-0 position-relative z-index-1">
+                                        <i class="fas fa-cogs me-2"></i> تنظیمات صفحه اصلی
+                                    </h2>
+                                    <p class="text-white-50 mb-0 mt-2 position-relative z-index-1">
+                                        با کلیک روی کارت‌های زیر، به بخش‌های مختلف وب‌سایت دسترسی پیدا کنید.
+                                    </p>
+                                </div>
 
-    <main class="content-wrapper">
-        <button class="btn btn-toggle d-lg-none" id="menuToggleBtn" aria-label="بازکردن منو">
-            <i class="bi bi-list"></i> منو
-        </button>
-        
-        {{-- نمایش نوتیفیکیشن‌های خوانده‌نشده --}}
-        {{-- @if(auth()->check() && auth()->user()->unreadNotifications->count())
-            <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
-                <div>
-                    <i class="bi bi-bell-fill me-2"></i>
-                    شما {{ auth()->user()->unreadNotifications->count() }} اعلان خوانده‌نشده دارید.
+                                <div class="card-body p-5">
+                                    <div class="row g-4 d-flex justify-content-center flex-wrap">
+                                        
+                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+                                            <a href="#" class="dashboard-link-card text-decoration-none">
+                                                <div class="icon-wrapper">
+                                                    <i class="fas fa-image fa-3x text-primary"></i>
+                                                </div>
+                                                <h5 class="title mt-4">بنر هیرو 🖼️</h5>
+                                                <p class="description">
+                                                    مدیریت تصاویر و محتوای اصلی صفحه.
+                                                </p>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+                                            <a href="#" class="dashboard-link-card text-decoration-none">
+                                                <div class="icon-wrapper">
+                                                    <i class="fas fa-handshake fa-3x text-success"></i>
+                                                </div>
+                                                <h5 class="title mt-4">خدمات 🤝</h5>
+                                                <p class="description">
+                                                    افزودن، ویرایش و حذف خدمات ارائه شده.
+                                                </p>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+                                            <a href="#" class="dashboard-link-card text-decoration-none">
+                                                <div class="icon-wrapper">
+                                                    <i class="fas fa-comments fa-3x text-warning"></i>
+                                                </div>
+                                                <h5 class="title mt-4">نظرات مشتریان 💬</h5>
+                                                <p class="description">
+                                                    مدیریت بازخوردها و نظرات کاربران.
+                                                </p>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+                                            <a href="#" class="dashboard-link-card text-decoration-none">
+                                                <div class="icon-wrapper">
+                                                    <i class="fas fa-chart-bar fa-3x text-info"></i>
+                                                </div>
+                                                <h5 class="title mt-4">آمار و گزارشات 📈</h5>
+                                                <p class="description">
+                                                    مشاهده آمار بازدید و گزارشات وب‌سایت.
+                                                </p>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
+                                            <a href="#" class="dashboard-link-card text-decoration-none">
+                                                <div class="icon-wrapper">
+                                                    <i class="fas fa-bell fa-3x text-danger"></i>
+                                                </div>
+                                                <h5 class="title mt-4">اعلان‌ها 🔔</h5>
+                                                <p class="description">
+                                                    مدیریت اعلان‌ها و پیام‌های سیستمی.
+                                                </p>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ route('notifications.index') }}" class="btn btn-sm btn-outline-dark">مشاهده اعلان‌ها</a>
-                </div>
-            </div>
-        @endif --}}
-        
-        @yield('content')
-    </main>
-</div>
+            </main>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const toggleBtn = document.getElementById('menuToggleBtn');
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const adminPanel = document.querySelector('.admin-panel');
 
-    function toggleSidebar() {
-        sidebar.classList.toggle('show');
-        overlay.classList.toggle('show');
-    }
-
-    function closeSidebar() {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
-    }
-
-    toggleBtn.addEventListener('click', toggleSidebar);
-    overlay.addEventListener('click', closeSidebar);
-    closeMenuBtn.addEventListener('click', closeSidebar);
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 992) {
-            closeSidebar();
-        }
-    });
-</script>
-
+            menuToggle.addEventListener('click', function() {
+                adminPanel.classList.toggle('sidebar-open');
+            });
+        });
+    </script>
 </body>
 </html>
