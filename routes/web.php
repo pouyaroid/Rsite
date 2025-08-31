@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\HeroBannerController;
 use App\Http\Controllers\Admin\PackageController;
@@ -69,3 +71,21 @@ Route::get('/settings',[SettingsController::class,'index'])->name('admin.setting
 //     // Settings
 //     Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings');
 // });
+
+//userView
+Route::get('/about', [AdminAboutController::class, 'index'])->name('about.index');
+
+// فرم ایجاد
+Route::get('/about/create', [AdminAboutController::class, 'create'])->name('about.create');
+
+// ذخیره داده جدید
+Route::post('/about', [AdminAboutController::class, 'store'])->name('about.store');
+
+// فرم ویرایش
+Route::get('/about/{about}/edit', [AdminAboutController::class, 'edit'])->name('about.edit');
+
+// بروزرسانی داده
+Route::put('/about/{about}', [AdminAboutController::class, 'update'])->name('about.update');
+
+// حذف داده
+Route::delete('/about/{about}', [AdminAboutController::class, 'destroy'])->name('about.destroy');
