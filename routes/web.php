@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\AdminPanelController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\HeroBannerController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -89,3 +90,25 @@ Route::put('/about/{about}', [AdminAboutController::class, 'update'])->name('abo
 
 // حذف داده
 Route::delete('/about/{about}', [AdminAboutController::class, 'destroy'])->name('about.destroy');
+
+
+
+Route::get('contact-us',[ContactController::class,'index']);
+
+
+/**
+ * روت‌های ادمین برای ویرایش
+ * GET  /admin/contact-info/edit
+ * POST /admin/contact-info/update
+ * (می‌توانید با میدلور auth محدود کنید)
+ */
+Route::prefix('admin')->group(function () {
+    Route::get('/contact-info/edit', [ContactController::class, 'edit'])
+        ->name('admin.contact.edit');
+    Route::post('/contact-info/update', [ContactController::class, 'update'])
+        ->name('admin.contact.update');
+        Route::get('/contact-info/create', [ContactController::class, 'create'])
+        ->name('admin.contact.create');
+});
+Route::get('/contact-info/edit', [ContactController::class, 'edit'])->name('admin.contact.edit');
+Route::post('/contact-info', [ContactController::class, 'store'])->name('admin.contact.store');
