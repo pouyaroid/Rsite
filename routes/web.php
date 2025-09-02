@@ -93,7 +93,7 @@ Route::delete('/about/{about}', [AdminAboutController::class, 'destroy'])->name(
 
 
 
-Route::get('contact-us',[ContactController::class,'index']);
+Route::get('contact-us',[ContactController::class,'index'])->name('contact');
 
 
 /**
