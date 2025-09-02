@@ -6,96 +6,17 @@
 	
 <!--================Header Menu Area =================-->
 
-
-<!--================Hero Banner Area Start =================-->
-{{-- <section class="hero-banner magic-ball">
-    <div class="container">
-        <div class="row align-items-center text-center text-md-right">
-            <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
-                <!-- داده‌های داینامیک یا پیش‌فرض -->
-                <h1>{{ $hero->title ?? 'بیشتر سفر کنید تا خودتان را کشف کنید' }}</h1>
-                <p class="text-justify">{{ $hero->description ?? 'یک متن پیش‌فرض برای توضیحات بنویسید.' }}</p>
-                <a class="button button-hero mt-4"
-                   href="{{ $hero->button_url ?? '#' }}">
-                   {{ $hero->button_text ?? 'شروع کنید' }}
-                </a>
-            </div>
-            <div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
-                <!-- تصویر -->
-                @if(!empty($hero) && $hero->image)
-                    <img class="img-fluid" src="{{ asset('storage/' . $hero->image) }}" alt="Hero Banner Image">
-                @else
-                    <img class="img-fluid" src="pics/home/hero-img.png" alt="">
-                @endif
-            </div>
-        </div>
-    </div>
-</section> --}}
+@include('admin.mainpage.herobanner.index')
 <!--================Hero Banner Area End =================-->
 
 
 <!--================Service Area Start =================-->
-<section class="section-margin generic-margin py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <img src="{{ asset('pics/home/section-icon.png') }}" alt="">
-            <h2 class="mt-3">محبوب ترین سرویس های ما</h2>
-            <p class="text-muted">محبوب ترین سرویس های ما که ما را از دیگران متمایز کرده است</p>
-        </div>
-
-        <div class="row g-4">
-            @if($services->count() > 0)
-                @foreach($services as $service)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 text-center shadow-sm border-0">
-                        <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top" alt="{{ $service->title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $service->title }}</h5>
-                            <p class="card-text">{{ $service->description }}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            @else
-                {{-- سرویس‌های پیش‌فرض در صورت خالی بودن دیتابیس --}}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 text-center shadow-sm border-0">
-                        <img src="{{ asset('pics/home/service1.png') }}" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">رزرو هتل</h5>
-                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 text-center shadow-sm border-0">
-                        <img src="{{ asset('pics/home/service2.png') }}" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">رزرو پرواز</h5>
-                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 text-center shadow-sm border-0">
-                        <img src="{{ asset('pics/home/service3.png') }}" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">رزرو مقصد</h5>
-                            <p class="card-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-    </div>
-</section>
+@include('admin.mainpage.services.index')
 <!--================Service Area End =================-->
 
 
 <!--================About Area Start =================-->
-@include('admin.mainpage.herobanner.index')
+
 <!--================Tour section End =================-->
 
 @include('admin.mainpage.packages.index')
