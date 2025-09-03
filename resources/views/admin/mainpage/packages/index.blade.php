@@ -2,119 +2,98 @@
     <div class="container">
 
         @if($packages->count() > 0)
-            {{-- نمایش داده‌های داینامیک --}}
-            <div class="row">
+            <div class="row g-4">
                 @foreach($packages as $package)
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="tour-card">
-                            <img class="card-img rounded-0"
-                                 src="{{ $package->image ? asset('storage/'.$package->image) : 'pics/home/default.png' }}"
-                                 alt="{{ $package->title }}">
-                            <div class="tour-card-overlay">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h4>{{ $package->title }}</h4>
-                                        @if($package->duration)
-                                            <small>{{ $package->duration }}</small>
-                                        @endif
-                                        <p>{{ $package->description }}</p>
-                                    </div>
-                                    <div class="media-price">
-                                        <h4 class="text-primary">{{ number_format($package->price) }} تومان</h4>
+                    <div class="col-sm-6 col-lg-4 col-xl-3">
+                        @if($package->image)
+                            {{-- حالت با تصویر --}}
+                            <div class="tour-card h-100 rounded-4 overflow-hidden shadow-sm crm-card">
+                                <img class="card-img-top"
+                                     src="{{ asset('storage/'.$package->image) }}"
+                                     alt="{{ $package->title }}">
+                                <div class="p-3">
+                                    <h5 class="fw-bold">{{ $package->title }}</h5>
+                                    @if($package->duration)
+                                        <small class="text-muted d-block">{{ $package->duration }}</small>
+                                    @endif
+                                    <p class="text-secondary small mt-2">{{ $package->description }}</p>
+                                    <div class="text-end mt-3">
+                                        <span class="badge bg-primary fs-6">
+                                            {{ number_format($package->price) }} تومان
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            {{-- حالت بدون تصویر (کارت شیک) --}}
+                            <div class="crm-card h-100 rounded-4 shadow-sm d-flex flex-column justify-content-between p-4 text-center">
+                                <div>
+                                    <h5 class="fw-bold">{{ $package->title }}</h5>
+                                    @if($package->duration)
+                                        <small class="text-muted d-block">{{ $package->duration }}</small>
+                                    @endif
+                                    <p class="text-secondary small mt-2">{{ $package->description }}</p>
+                                </div>
+                                <div class="mt-3">
+                                    <span class="badge bg-primary fs-6">
+                                        {{ number_format($package->price) }} تومان
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
-
         @else
-            {{-- نمایش نسخه استاتیک پیش‌فرض --}}
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="pics/home/tour1.png" alt="">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور پاریس</h4>
-                                    <small>5 روز</small>
-                                    <p>ما به درستی گردشگر خود را راهنمایی میکنیم</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">5 میلیون تومان</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <div class="tour-content">
-                                <h2>ما به شما پیشنهاد جدیدترین تورمان را میدهیم</h2>
-                                <p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="pics/home/tour2.png" alt="">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور هند</h4>
-                                    <small>5 روز</small>
-                                    <p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">3 میلیون تومان</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="col-md-6 col-lg-7">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="pics/home/tour3.png" alt="">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور هلند</h4>
-                                    <small>8 روز</small>
-                                    <p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">10 میلیون تومان</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-5">
-                    <div class="tour-card">
-                        <img class="card-img rounded-0" src="pics/home/tour4.png" alt="">
-                        <div class="tour-card-overlay">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4>تور فرانسه</h4>
-                                    <small>یک هفته</small>
-                                    <p>مطمئن باشید سفری بی نظیر با اکتشافاتی جدید پیش روی شما خواهید بود</p>
-                                </div>
-                                <div class="media-price">
-                                    <h4 class="text-primary">20 میلیون تومان</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="alert alert-info text-center">هیچ پکیجی برای نمایش وجود ندارد.</div>
         @endif
 
     </div>
 </section>
+
+{{-- استایل اختصاصی --}}
+<style>
+    .crm-card {
+        background: linear-gradient(135deg, #e3f2fd, #f9fbff);
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* انیمیشن بر روی حرکت و سایه */
+        min-height: 300px; /* اندازه استاندارد برای کارت */
+        margin-top: 20px; /* فاصله کارت از بالا */
+        border-radius: 12px;
+        opacity: 0;
+        transform: translateY(20px); /* افکت اولیه: کارت پایین‌تر از حالت معمول شروع می‌شود */
+    }
+
+    /* انیمیشن در زمان بارگذاری صفحه */
+    .crm-card.visible {
+        opacity: 1;
+        transform: translateY(0); /* افکت ورود کارت از پایین */
+    }
+
+    .crm-card:hover {
+        transform: translateY(-10px); /* بالا بردن کارت در حالت hover */
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* سایه زیبا */
+    }
+
+    .crm-card .card-img-top {
+        border-bottom: 4px solid #1976d2; /* خط زیبای زیر تصویر */
+    }
+
+    /* برای کارت بدون تصویر */
+    .crm-card .p-3 {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+{{-- اسکریپت برای انیمیشن ورود کارت‌ها --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.crm-card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, index * 100); /* افکت انیمیشن برای هر کارت به طور جداگانه */
+        });
+    });
+</script>
