@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09AyGasBodEqbWPlusYKZ5eeqypNomaU3de3dd5fIavUiC2N7SQ/" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
     
     <style>
         /* --- CSS Variables --- */
@@ -182,93 +185,78 @@
             </header>
 
             <main>
-                <div class="container-fluid py-4">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="card shadow-lg border-0 rounded-5 dashboard-card">
-                                <div class="card-header bg-gradient-primary text-white text-center py-5 rounded-top-5 position-relative">
-                                    <div class="card-header-overlay position-absolute top-0 start-0 w-100 h-100 rounded-top-5"></div>
-                                    <h2 class="card-title fw-bold mb-0 position-relative z-index-1">
-                                        <i class="fas fa-cogs me-2"></i> تنظیمات صفحه اصلی
-                                    </h2>
-                                    <p class="text-white-50 mb-0 mt-2 position-relative z-index-1">
-                                        با کلیک روی کارت‌های زیر، به بخش‌های مختلف وب‌سایت دسترسی پیدا کنید.
-                                    </p>
+                <div class="container py-5">
+                    <div class="text-center mb-5">
+                        <h2 class="fw-bold"><i class="fa-solid fa-cogs text-primary me-2"></i> مدیریت بخش‌ها</h2>
+                        <p class="text-muted">از اینجا می‌توانید محتوای بخش‌های مختلف سایت را مدیریت کنید</p>
+                    </div>
+                
+                    <div class="row g-4">
+                        <!-- کارت نمونه -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="dashboard-card p-4">
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-image fa-2x text-primary"></i>
                                 </div>
-
-                                <div class="card-body p-5">
-                                    <div class="row g-4 d-flex justify-content-center flex-wrap">
-                                        
-                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                                            <a href="#" class="dashboard-link-card text-decoration-none">
-                                                <div class="icon-wrapper">
-                                                    <i class="fas fa-image fa-3x text-primary"></i>
-                                                </div>
-                                                <h5 class="title mt-4">بنر هیرو 🖼️</h5>
-                                                <p class="description">
-                                                    مدیریت تصاویر و محتوای اصلی صفحه.
-                                                </p>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                                            <a href="#" class="dashboard-link-card text-decoration-none">
-                                                <div class="icon-wrapper">
-                                                    <i class="fas fa-handshake fa-3x text-success"></i>
-                                                </div>
-                                                <h5 class="title mt-4">خدمات 🤝</h5>
-                                                <p class="description">
-                                                    افزودن، ویرایش و حذف خدمات ارائه شده.
-                                                </p>
-                                            </a>
-                                        </div>
-
-                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                                            <a href="#" class="dashboard-link-card text-decoration-none">
-                                                <div class="icon-wrapper">
-                                                    <i class="fas fa-comments fa-3x text-warning"></i>
-                                                </div>
-                                                <h5 class="title mt-4">نظرات مشتریان 💬</h5>
-                                                <p class="description">
-                                                    مدیریت بازخوردها و نظرات کاربران.
-                                                </p>
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                                            <a href="#" class="dashboard-link-card text-decoration-none">
-                                                <div class="icon-wrapper">
-                                                    <i class="fas fa-chart-bar fa-3x text-info"></i>
-                                                </div>
-                                                <h5 class="title mt-4">آمار و گزارشات 📈</h5>
-                                                <p class="description">
-                                                    مشاهده آمار بازدید و گزارشات وب‌سایت.
-                                                </p>
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="col-md-4 col-sm-6 d-flex justify-content-center">
-                                            <a href="#" class="dashboard-link-card text-decoration-none">
-                                                <div class="icon-wrapper">
-                                                    <i class="fas fa-bell fa-3x text-danger"></i>
-                                                </div>
-                                                <h5 class="title mt-4">اعلان‌ها 🔔</h5>
-                                                <p class="description">
-                                                    مدیریت اعلان‌ها و پیام‌های سیستمی.
-                                                </p>
-                                            </a>
-                                        </div>
-
-                                    </div>
+                                <h5>بنر هیرو 🖼️</h5>
+                                <p class="text-muted small">مدیریت تصاویر و محتوای اصلی صفحه</p>
+                                <div class="dashboard-actions d-flex justify-content-center gap-2 mt-3">
+                                    <a href="{{ route('admin.mainpage.herobanner') }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fa fa-eye"></i> مشاهده
+                                    </a>
+                                    <a href="{{ route('admin.hero-banner.create') }}" class="btn btn-success btn-sm">
+                                        <i class="fa fa-plus"></i> ثبت
+                                    </a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- کارت دوم -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="dashboard-card p-4">
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-box-open fa-2x text-success"></i>
+                                </div>
+                                <h5>پکیج‌ها 📦</h5>
+                                <p class="text-muted small">افزودن، مدیریت و ویرایش پکیج‌ها</p>
+                                <div class="dashboard-actions d-flex justify-content-center gap-2 mt-3">
+                                    <a href="{{ route('packages.index') }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fa fa-eye"></i> مشاهده
+                                    </a>
+                                    <a href="{{ route('packages.create') }}" class="btn btn-success btn-sm">
+                                        <i class="fa fa-plus"></i> ثبت
+                                    </a>
+                                    <a href="" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-pen"></i> ویرایش
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- کارت سوم -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="dashboard-card p-4">
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-comments fa-2x text-warning"></i>
+                                </div>
+                                <h5>نظرات 💬</h5>
+                                <p class="text-muted small">مدیریت بازخوردها و نظرات کاربران</p>
+                                <div class="dashboard-actions d-flex justify-content-center gap-2 mt-3">
+                                    <a href="{{ route('testimonials.index') }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="fa fa-eye"></i> مشاهده
+                                    </a>
+                                    <a href="{{ route('testimonials.create') }}" class="btn btn-success btn-sm">
+                                        <i class="fa fa-plus"></i> ثبت
+                                    </a>
+                                    <a href="" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-pen"></i> ویرایش
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
+                    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
