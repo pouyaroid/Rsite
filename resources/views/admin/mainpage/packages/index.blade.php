@@ -1,5 +1,10 @@
+<div class="text-center pb-1">
+    <h2 class="mt-3 text-dark">RoshdCrm|سی ار ام رشد</h2>
+    <p class="text-muted">لیست تعرفه ها</p>
+</div>
 <section class="section-margin pb-xl-5">
     <div class="container">
+
 
         @if($packages->count() > 0)
             <div class="row g-4">

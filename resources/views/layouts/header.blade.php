@@ -2,7 +2,7 @@
 
 <header class="main-header shadow-sm rounded-4 my-2 mx-3">
   <nav class="navbar navbar-expand-lg">
-    <div class="container">
+    <div class="container d-flex align-items-center justify-content-between">
 
       <!-- لوگو -->
       <a class="navbar-brand fw-bold" href="{{ url('/') }}">
@@ -15,8 +15,8 @@
       </button>
 
       <!-- منو -->
-      <div class="collapse navbar-collapse" id="mainMenu">
-        <ul class="navbar-nav ms-auto text-end">
+      <div class="collapse navbar-collapse justify-content-center" id="mainMenu">
+        <ul class="navbar-nav text-center gap-lg-2">
           <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">صفحه نخست</a></li>
           <li class="nav-item"><a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ url('/about') }}">درباره ما</a></li>
           <li class="nav-item"><a class="nav-link {{ request()->is('packages') ? 'active' : '' }}" href="{{ url('/packages') }}">پکیج‌ها</a></li>
@@ -44,16 +44,15 @@
 
           <li class="nav-item"><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">تماس با ما</a></li>
         </ul>
+      </div>
 
-        <!-- CTA -->
-        <div class="ms-lg-3 mt-3 mt-lg-0">
-          <a href="#" class="btn btn-gradient rounded-pill px-4 py-2 fw-bold">شروع</a>
-        </div>
+      <!-- CTA -->
+      <div class="d-none d-lg-block">
+        <a href="#" class="btn btn-gradient rounded-pill px-4 py-2 fw-bold">شروع</a>
       </div>
     </div>
   </nav>
 </header>
-
 <style>
 /* استایل لوگو */
 .logo {

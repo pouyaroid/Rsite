@@ -7,8 +7,8 @@
         background: linear-gradient(60deg, #3a7bd5, #00d2ff); 
         
         /* گرد کردن گوشه‌های بالا */
-        border-top-left-radius: 40px;
-        border-top-right-radius: 40px;
+        border-top-left-radius: 60px;
+        border-top-right-radius: 60px;
         
         padding-top: 4rem; /* فاصله از بالا */
         padding-bottom: 2rem; /* فاصله از پایین */
@@ -72,7 +72,7 @@
                     <i class="fas fa-gem me-3"></i>Roshd CRM
                 </h6>
                 <p>
-                    متنی کوتاه و جذاب درباره شرکت یا سرویس شما. این متن به کاربران کمک می‌کند تا به سرعت با هویت برند شما آشنا شوند.
+                    راهکار هوشمند مدیریت ارتباط با مشتری است که به کسب‌وکارها کمک می‌کند فروش خود را افزایش دهند، ارتباطاتشان را سازمان‌دهی کنند و تجربه‌ای متمایز برای مشتریانشان بسازند. با رشد، مسیر توسعه کسب‌وکار شما شفاف‌تر و سریع‌تر خواهد بود.
                 </p>
             </div>
 
@@ -100,7 +100,7 @@
                 <h6 class="text-uppercase fw-bold mb-4">تماس با ما</h6>
                 <p><i class="fas fa-home me-3"></i>آدرس شرکت شما، شهر، کشور</p>
                 <p><i class="fas fa-envelope me-3"></i>info@example.com</p>
-                <p><i class="fas fa-phone me-3"></i>+ 98 21 123 456 78</p>
+                <p><i class="fas fa-phone me-3"></i>09385347786</p>
             </div>
         </div>
     </div>
